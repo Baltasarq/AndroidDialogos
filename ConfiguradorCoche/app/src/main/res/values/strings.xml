@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ConfiguradorCoche</string>
+    <string name="aviso_legal">Aviso legal</string>
+    <string name="gasolina">Gasolina</string>
+    <string name="di_sel">Diésel</string>
+    <string name="cambia">Cambia</string>
+    <string name="extras">Extras</string>
+    <string name="personaliza">Personaliza</string>
+</resources>

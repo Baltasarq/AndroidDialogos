@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button android:id="@+id/btLegal"
+            android:text="@string/aviso_legal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton    android:id="@+id/rbDiesel"
+            android:text="@string/di_sel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton    android:id="@+id/rbGasolina"
+            android:text="@string/gasolina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView   android:id="@+id/lblModelo"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight=".9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button     android:id="@+id/btModelo"
+            android:layout_weight=".1"
+            android:text="@string/cambia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/extras"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_weight=".1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText   android:id="@+id/edExtras"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:enabled="false"
+            android:layout_weight=".8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button     android:id="@+id/btExtras"
+            android:text="@string/extras"
+            android:layout_weight=".1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView   android:id="@+id/lblPersonaliza"
+            android:layout_weight=".9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button     android:id="@+id/btPersonaliza"
+            android:text="@string/personaliza"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight=".1" />
+    </LinearLayout>
+
+</LinearLayout>
