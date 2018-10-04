@@ -6,4 +6,6 @@
     <string name="cambia">Cambia</string>
     <string name="extras">Extras</string>
     <string name="personaliza">Personaliza</string>
+    <string name="motor">Motor</string>
+    <string name="coche">Coche</string>
 </resources>

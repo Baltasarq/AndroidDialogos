@@ -1,23 +1,35 @@
 package com.devbaltasarq.configuradorcoche;
 
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/** Representa un configurador de coches. */
 public class MainActivity extends AppCompatActivity {
+    private static final String LogTag = MainActivity.class.getSimpleName();
+
+    /** Modelos de coches disponibles. */
     public final static String[] Modelos = {
             "Basic 1.1 T",
+            "Elegance 1.1 T",
+            "Ambiance 1.1 T",
+            "Basic 1.4 TDI",
             "Elegance 1.4 TDI",
+            "Ambiance 1.4 TDI",
             "Sport 2.0 TSI"
     };
 
+    /** Los posibles extras a incluir en el coche. */
     public final static String[] Extras = {
             "Bluetooth",
             "Wifi",
@@ -25,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
             "A/C"
     };
 
+    /** Los extras incluidos. Este vector y el anterior
+      * deben tener la misma longitud.
+      */
     private boolean[] extrasActivados = {
             false, false, false, false
     };
@@ -41,9 +56,21 @@ public class MainActivity extends AppCompatActivity {
         final TextView lblModelo = this.findViewById( R.id.lblModelo );
         final Button btExtras = this.findViewById( R.id.btExtras );
         final Button btPersonaliza = this.findViewById( R.id.btPersonaliza );
+        final EditText edExtras = this.findViewById( R.id.edExtras );
+        final TextView lblPersonaliza = this.findViewById( R.id.lblPersonaliza );
 
+        // Chk
+        if ( Extras.length != extrasActivados.length ) {
+            Log.e( LogTag, "longitud de extras y extras activados diferente" );
+            this.finish();
+        }
+
+        // Preparar valores iniciales
         lblModelo.setText( Modelos[ 0 ] );
+        this.muestraExtras();
+        this.muestraModeloFinal();
 
+        // Gestores de eventos
         btLegal.setOnClickListener( (v) -> this.muestraDialogoLegal() );
         rbDiesel.setOnClickListener( (v) -> this.manejaBotonesRadio( v ) );
         rbGasolina.setOnClickListener( (v) -> this.manejaBotonesRadio( v ) );
@@ -51,9 +78,62 @@ public class MainActivity extends AppCompatActivity {
         btExtras.setOnClickListener( (v) -> this.seleccionaExtras() );
         btPersonaliza.setOnClickListener( (v) -> this.personaliza() );
 
-        this.muestraExtras();
+        // Modelo final siempre actualizado
+        final TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                MainActivity.this.muestraModeloFinal();
+            }
+        };
+
+        lblModelo.addTextChangedListener( textWatcher );
+        rbDiesel.setOnCheckedChangeListener( (b, v) -> this.muestraModeloFinal() );
+        rbGasolina.setOnCheckedChangeListener( (b, v) -> this.muestraModeloFinal() );
+        edExtras.addTextChangedListener( textWatcher );
+        lblPersonaliza.addTextChangedListener( textWatcher );
     }
 
+    /** Muestra el modelo de coche con todas las opciones seleccionadas. */
+    private void muestraModeloFinal()
+    {
+        final TextView lblFinal = this.findViewById( R.id.lblFinal );
+        final TextView lblPersonaliza = this.findViewById( R.id.lblPersonaliza );
+        final TextView lblModelo = this.findViewById( R.id.lblModelo );
+        final RadioButton rbDiesel = this.findViewById( R.id.rbDiesel );
+        final RadioButton rbGasolina = this.findViewById( R.id.rbGasolina );
+        final EditText edExtras = this.findViewById( R.id.edExtras );
+        final StringBuilder msg = new StringBuilder();
+
+        msg.append( lblModelo.getText().toString() );
+        msg.append( ' ' );
+
+        if ( rbDiesel.isChecked() ) {
+            msg.append( rbDiesel.getText().toString() );
+            msg.append( ' ' );
+        }
+
+        if ( rbGasolina.isChecked() ) {
+            msg.append( rbGasolina.getText().toString() );
+            msg.append( ' ' );
+        }
+
+        msg.append( edExtras.getText().toString() );
+        msg.append( ' ' );
+        msg.append( lblPersonaliza.getText().toString() );
+        lblFinal.setText( msg.toString() );
+    }
+
+    /** Pregunta al usuario el mensaje para personalizar el coche. */
     private void personaliza()
     {
         final TextView lblPersonaliza = this.findViewById( R.id.lblPersonaliza );
@@ -69,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         dlg.create().show();
     }
 
+    /** Pregunta al usuario los extras que quiere. */
     private void seleccionaExtras()
     {
         final AlertDialog.Builder dlg = new AlertDialog.Builder( this );
@@ -83,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         dlg.create().show();
     }
 
+    /** Muestra los extras seleccionados por el usuario. */
     private void muestraExtras()
     {
         final StringBuilder msgExtras = new StringBuilder();
@@ -104,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
         edExtras.setText( msgFinalExtras );
     }
 
+    /** Selecciona uno de los modelos de coches disponibles. */
     private void seleccionaModelo()
     {
         final AlertDialog.Builder dlg = new AlertDialog.Builder( this );
@@ -115,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         dlg.create().show();
     }
 
+    /** Gestiona los motores diesel o gasolina. */
     private void manejaBotonesRadio(View v)
     {
         final RadioButton rbDiesel = this.findViewById( R.id.rbDiesel );
@@ -134,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
+    /** Muestra un "texto legal" poco serio. */
     private void muestraDialogoLegal()
     {
         final AlertDialog.Builder dlg = new AlertDialog.Builder( this );

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidDialogos.iml" filepath="$PROJECT_DIR$/AndroidDialogos.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ConfiguradorCoche.iml" filepath="$PROJECT_DIR$/ConfiguradorCoche.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$USER_HOME$/Dropbox/Prys/Android/AndroidDialogos/AndroidDialogos.iml" filepath="$USER_HOME$/Dropbox/Prys/Android/AndroidDialogos/AndroidDialogos.iml" />
+      <module fileurl="file://$USER_HOME$/Dropbox/Prys/Android/AndroidDialogos/app/app.iml" filepath="$USER_HOME$/Dropbox/Prys/Android/AndroidDialogos/app/app.iml" />
     </modules>
   </component>
 </project>
